@@ -6,17 +6,12 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: SonarCloud
+name: SonarCloud Analysis
 
 on:
   push:
     branches:
       - main
-
-permissions:
-  contents: read
-  actions: read
-  security-events: write
 
 jobs:
   sonar:
@@ -30,7 +25,11 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build and Analyze
+      - name: Analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify sonar:sonar
+        run: |
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=rafifpajwakurniawan_continuous-insepction \
+            -Dsonar.organization=rafifpajwakurniawan \
+            -Dsonar.host.url=https://sonarcloud.io
