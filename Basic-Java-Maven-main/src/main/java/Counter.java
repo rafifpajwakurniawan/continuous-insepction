@@ -2,6 +2,8 @@ package src.main.java;
 
 public class Counter {
 
+	int unused = 100;
+
 	private int count;
 	
 	public Counter() {
